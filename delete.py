@@ -4,6 +4,7 @@
 
 import os
 import sys
+import subprocess
 
 def arguments():
     args = sys.argv
@@ -22,7 +23,8 @@ def arguments():
         print( 'delete.py <num> <dir> -- For files older than <num> days in <dir> directory' )
 
 def delete( days, directory ):
-    cmd = 'find ' + directory + ' -type f -mtime +' + days + ' -ls' 
-    os.system( cmd )
-
+    cmd = 'find ' + directory + ' -type f -mtime ' + days + ' -exec rm -rf {} \;'
+    run = subprocess.check_output( cmd, shell = True )
+    print( 'Files to delete: ' )
+    print( run )
 arguments()

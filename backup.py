@@ -19,16 +19,16 @@ def arguments():
         print( 'Invalid number of parameters, type: \nbackup.py -h <host> -u <username> -p <password> -d <database> -l <dump location>' )
 
     elif ( argscount == 11 ):
-        host = arguments[ arguments.index ( '-h' ) + 1 ]
+        host = arguments[ arguments.index( '-h' ) + 1 ]
         user = arguments[ arguments.index( '-u' ) + 1 ]
         password = arguments[ arguments.index( '-p' ) + 1 ]
-        db = arguments[ arguments.index( '-d') + 1 ]
+        db = arguments[ arguments.index( '-d' ) + 1 ]
         dir = arguments[ arguments.index( '-l' ) + 1 ]
 
         #Now call the database backup function
         db_backup( host, user, password, db, dir )
 
     else:
-        print( 'Invalid action performed, type: \nbackup.py -h <host> -u <username> -p <password> -d <database> -l <dump location>')
+        print( 'Invalid action performed, type: \nbackup.py -h <host> -u <username> -p <password> -d <database> -l <dump location>' )
 
 arguments()
