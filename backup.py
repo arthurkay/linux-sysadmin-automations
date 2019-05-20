@@ -1,5 +1,5 @@
 # Author: Arthur Kalikiti
-# Python code for backing up database.
+# Python code for backing up database(s).
 # Email: arthur@kalikiti.net
 
 import sys
