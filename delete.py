@@ -25,6 +25,6 @@ def arguments():
 def delete( days, directory ):
     cmd = 'find ' + directory + ' -type f -mtime ' + days + ' -exec rm -rf {} \;'
     run = subprocess.check_output( cmd, shell = True )
-    print( 'Files to delete: ' )
+    print( 'Deleting files:' )
     print( run )
 arguments()
