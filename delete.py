@@ -1,6 +1,6 @@
 # Author: Arthur Kalikiti
 # Python code for deleting database old databases.
-# Email: arthur@crystaline.co.zm
+# Email: arthur@kalikiti.net
 
 import os
 import sys
@@ -20,7 +20,7 @@ def arguments():
     else:
         print( 'Unexpected error: \n' )
         print( 'delete.py <num> <dir> -- For files older than <num> days in <dir> directory' )
-        
+
 def delete( days, directory ):
     cmd = 'find ' + directory + ' -type f -mtime +' + days + ' -ls' 
     os.system( cmd )

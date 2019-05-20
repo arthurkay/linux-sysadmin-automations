@@ -1,6 +1,6 @@
 # Author: Arthur Kalikiti
 # Python code for backing up database.
-# Email: arthur@crystaline.co.zm
+# Email: arthur@kalikiti.net
 
 import sys
 import os
