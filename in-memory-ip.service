@@ -1,0 +1,14 @@
+[Unit]
+Description=IP address persistence service
+After=networ.target
+After=network-online.target
+Requires=strongswan.service
+AssertPathExists=/sysadmin/
+
+[Service]
+Type=oneshot
+ExecStart=/sysadmin/ip-create.sh
+
+[Install]
+WantedBy=multi-user.target
+

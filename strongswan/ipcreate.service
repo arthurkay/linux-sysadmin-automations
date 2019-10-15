@@ -1,0 +1,16 @@
+[Unit]
+Description=IP CREATE - Create in memeory IP addresses
+After=network.target
+After=network-online.target
+Requires=strongswan.service
+AssertPathExists=/sysadmin/strongswan/
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /sysadmin/strongswan/create.py 192.168.14.22 192.168.14.23
+ExecStop=/usr/bin/python /sysadmin/strongswan/delete.py 192.168.14.22 192.168.14.23
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
