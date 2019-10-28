@@ -1,0 +1,76 @@
+#!/bin/bash
+###############################################################################
+#
+# Author: 		Arthur Kalikiti
+# description:		SysV init Script to persist in memory IPs
+# Email: 		arthur@crystaline.co.zm
+# Email: 		arthur@kalikiti.net
+# Phone: 		+260969580761
+#
+###############################################################################
+
+## define IPs in the array below
+ip_array=(192.168.200.177 192.168.200.172)
+
+## get number of IPs in array
+ip_count=${#ip_array[@]}
+
+create_ip() {
+	
+	for (( i=0; i < $ip_count; i++ ))
+	do
+		echo "Adding ${ip_array[$i]}"
+		ip addr add ${ip_array[$i]}/32 dev lo 
+	done
+}
+
+delete_ip() {
+	for (( i=0; i < $ip_count; i++ ))
+	do
+		echo "Deleting ${ip_array[$i]]}"
+		ip addr del ${ip_array[$i]}/32 dev lo
+	done
+}
+
+status_ip() {
+	for (( i=0; i < $ip_count; i++ ))
+	do
+		result=$(ip addr show lo | grep ${ip_array[$i]})
+		if [ -z $result ]; then
+			echo "${ip_array[$i]} is not on the VLAN"
+		else
+			echo "Listening for traffic on ${ip_array[$i]}"
+		fi
+	done
+}
+
+recreate_ip() {
+	# First delete all IPs managed by this script
+	echo "Removing IPs from loopback interface"
+	delete_ip
+
+	# Then recreate then
+	echo "Recreating IPs on loopback interface"
+	create_ip
+}
+help_menu() {
+	echo "Please use: service [start|stop|status|restart]"
+}
+
+case "$1" in
+	start)
+	create_ip
+	;;
+	stop)
+	delete_ip
+	;;
+	status)
+	status_ip
+	;;
+	restart)
+	recreate_ip
+	;;
+	*)
+	help_menu
+	;;
+esac 
